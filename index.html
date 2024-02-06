@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=a, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @font-face {
+            font-family: PressStart;
+            src: url(PressStart2P-Regular.ttf);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: PressStart;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: -moz-none;
+            -o-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            counter-reset: checkbox-counter 0;
+            min-width: 100vw;
+            min-height: 100vh;
+        }
+
+        #start:after {
+            content: counter(checkbox-counter)
+        }
+
+        #start .enemy {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        #start:target .enemy {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-image: url(game.svg);
+            position: absolute;
+
+            animation-iteration-count: infinite, 1;
+            animation-name: fly-animation-1, fade;
+            animation-duration: 5s, .2s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: none, forwards !important;
+            animation-play-state: running, paused;
+            animation-iteration-count: infinite, 1;
+            transition: .2s linear;
+            cursor: url(cursor-red.cur), crosshair !important;
+
+            opacity: 0;
+        }
+
+        #start:target {
+            z-index: 50;
+        }
+
+        #start:target .enemy.anim2 {
+            animation-name: fly-animation-2, fade;
+        }
+
+        #start:target .enemy.anim3 {
+            animation-name: fly-animation-3, fade;
+        }
+
+        #start:target .enemy.anim4 {
+            animation-name: fly-animation-4, fade;
+        }
+
+        input[type="checkbox"]:after {
+            counter-increment: checkbox-length;
+            background-image: url(game.svg);
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            display: block;
+            content: '';
+        }
+
+        .enemy:checked {
+            animation-play-state: paused, running !important;
+            counter-increment: checkbox-counter;
+            pointer-events: none;
+        }
+
+        .enemy:checked::after {
+            background-image: url(boom.svg);
+            background-size: cover;
+
+        }
+
+        .container:has(.enemy:hover) {
+            cursor: url(cursor-red.cur), crosshair !important;
+        }
+
+        @keyframes fly-animation-2 {
+            0% {
+                left: 50vmin;
+                top: 45.6vmin;
+
+            }
+
+            50% {
+                left: 100vw;
+                top: 45.6vmin;
+
+            }
+
+            100% {
+                left: 50vmin;
+                top: 45.6vmin;
+
+            }
+        }
+
+        @keyframes fly-animation-3 {
+            0% {
+                left: 0;
+                top: 20%;
+
+            }
+
+            10% {
+                left: 10vw;
+                top: 30%;
+
+            }
+
+            100% {
+                left: 50vmin;
+                top: 45.6vmin;
+
+            }
+        }
+
+        @keyframes fly-animation-4 {
+            0% {
+                right: 0;
+                top: 0;
+
+            }
+
+            10% {
+                right: 20%;
+                top: 30%;
+
+            }
+
+            80% {
+                right: 50vmin;
+                top: 150vh;
+
+            }
+
+            100% {
+                right: 100%;
+                top: -50%;
+            }
+        }
+
+        @keyframes fly-animation-1 {
+            0% {
+                left: 50vmin;
+                top: 45.6vmin;
+
+            }
+
+            12.383428605531254% {
+                left: 0vmin;
+                top: 20vmin;
+
+            }
+
+            12.393428605531254% {
+                left: 0vmin;
+                top: 20vmin;
+
+            }
+
+            23.173793913301736% {
+                left: 20vmin;
+                top: 0vmin;
+
+            }
+
+            23.183793913301738% {
+                left: 20vmin;
+                top: 0vmin;
+
+            }
+
+            50.135597159965215% {
+                left: 89.6vmin;
+                top: 12.27235786vmin;
+
+            }
+
+            50.14559715996521% {
+                left: 89.6vmin;
+                top: 12.27235786vmin;
+
+            }
+
+            84.84504501773888% {
+                left: 0vmin;
+                top: 28.07125533vmin;
+
+            }
+
+            84.85504501773889% {
+                left: 0vmin;
+                top: 28.07125533vmin;
+
+            }
+
+            99.99% {
+                left: 23.55457999vmin;
+                top: -13.6vmin;
+
+            }
+
+            100% {
+                left: 50vmin;
+                top: -13.6vmin;
+            }
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 100%;
+                z-index: 100;
+            }
+
+            100% {
+                opacity: 0%;
+                z-index: -100;
+            }
+        }
+
+        .start {
+            position: absolute;
+            z-index: 1;
+            top: 50vh;
+            left: 50vw;
+            transform: translateX(-50%) translateY(-50%);
+            color: black;
+            text-transform: uppercase;
+            font-size: 3rem;
+            text-decoration: none;
+            cursor: url(cursor-red.cur), crosshair;
+        }
+
+        .start:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            background-color: #00ff00;
+            display: flex;
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+            cursor: url(cursor.cur), crosshair;
+        }
+
+        .restart {
+            color:#000;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        #endScreen {
+            display: none
+        }
+
+        #endScreen::after {
+            content: 'destroyed: ' counter(checkbox-counter);
+            position: absolute;
+            margin-top: 4rem;
+        }
+
+        input[type="checkbox"]:checked+input[type="checkbox"]:checked+input[type="checkbox"]:checked+input[type="checkbox"]:checked+input[type="checkbox"]:checked+input[type="checkbox"]:checked+#endScreen {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            ;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #00ff00;
+        }
+    </style>
+</head>
+
+<body>
+    <a class="start" href="#start">start</a>
+    <div class="container" id="start">
+
+        <input class="enemy" type="checkbox">
+        <input class="enemy anim3" type="checkbox">
+        <input class="enemy anim4" type="checkbox">
+        <input class="enemy anim2" type="checkbox">
+        <input class="enemy anim2" type="checkbox">
+        <input class="enemy anim2" type="checkbox">
+        <div id="endScreen">You win!</div>
+    </div>
+    <a class="restart" href="index.html">restart</a>
+</body>
+
+</html>
